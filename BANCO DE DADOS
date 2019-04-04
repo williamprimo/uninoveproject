@@ -1,0 +1,31 @@
+# uninoveproject
+Projeto de conclusão de semestre - 3° e 4° semestre
+banco MySQL usando Java / JSP
+
+Para se conectar e fazer consultas a um Banco de Dados MySQL, primeiramente é necessário criar um banco através do painel de controle.
+Tendo o banco criado, utilize o seguinte exemplo em JSP para acessar e consultar seu banco Mysql:
+
+<html><head> <title>Acessando um Banco de Dados MySQL</title> </head><body> <!-- //@page import="java.sql.Connection"% //@page import="java.sql.DriverManager"% //@page import="java.sql.SQLException"% --> <%@page import="java.sql.*"%> <%@page import="java.io.*"%> <%@page import="javax.servlet.*"%>
+ 
+<%
+	// Passo 1. Carregar o Driver JDBC
+	//Class.forName("org.gjt.mm.mysql.Driver");
+	Class.forName("com.mysql.jdbc.Driver");
+	
+	// Passo 2. Criar um objeto Connection 
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost/BANCO_DE_DADOS?user=USUARIO&password=SENHA");
+	out.println("Conexao iniciada...<br />");
+	
+	// Passo 3. Criar um objeto Statement 
+	Statement s = con.createStatement(); 
+	
+	// Passo 4. Usar o objeto Statement para obter um objeto ResultSet
+	String sql = "SELECT * FROM TABELA";
+	ResultSet rs = s.executeQuery(sql);
+	
+	//Passo 5. Imprimindo o resultado
+	while (rs.next()) { out.println(rs.getString(1) + " " + rs.getString(2) + "<br />"); }
+	
+	//Passo 6. Fechando conexoes
+	rs.close(); s.close(); con.close();
+%>
