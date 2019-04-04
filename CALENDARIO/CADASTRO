@@ -1,0 +1,32 @@
+Ontem como viram eu mandei um vídeo aqui  de um cara ensinando um programa simples com HTML,JSP, E JAVA + MySQL
+Basicamente o que estamos fazendo lá na faculdade, o próprio xaropada falou que vai adiantar as aulas de banco de dados.
+
+Porque um pessoal pediu e disse que estavam já mexendo para o projeto da professora com Java + MySQL
+
+Então, pensando nisso e no que  o @matheus falou  no grupo sobre um PETSHOP/LOJAS/SERVIÇO
+
+Podemos fazer algo simples e no caso de PETSHOP:  
+
+Na situação "hipotética" de um Petshop, já conhecido, e com uma lista de clientes já FIXA e FIEL podemos partir do seguinte ponto.
+
+No ultimo semestre a gente aprendeu muito sobre engenharia de re-usabilidade, 
+que se baseia em utilizar coisas já prontas ou que já existe para facilitar e maximizar o tempo do projeto.
+
+Então, pensando em tudo isso podemos fazer o seguinte:
+
+
+Uma pagina em JPS/JAVA  utilizando o site  os codigos fornecidos pelo www.reservio.com 
+"Programa gratuito para agendamento on-line Programação de agendamentos, melhore seus serviços, promova seu negócio,
+agendamento online 24h, lembrete para clientes."
+
+
+Existem vários sites nesse mesmo seguimento, alguns pagos, outros gratuitos, 
+mas na sua maioria o FREE atenderia a nossa necessidade do projeto.
+
+Adicionamos o código do Reservio (ou qualquer agenda) na nossa pagina inicial, 
+após o cliente verificar as datas e disponibilidades ele é direcionado para o nossa outra pagina JSP para finalizar o cadastro.
+enviado tudo que foi digitado para o banco de dados que poderá ser visualizado pelo dono do estabelecimento pelo app/web/e-mail. 
+
+
+Podemos ter 2 funcionalidades para a agenda, uma agenda estática,
+aonde o cliente somente visualiza o que tem disponível e vai na agendamento.jsp para finalizar "reservando a data" ou um calendário interligado com o jsp.
