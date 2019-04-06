@@ -1,0 +1,134 @@
+MAIN ACTIVITY.JAVA
+
+package com.example.grassi1;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
+
+public class MainActivity extends AppCompatActivity {
+
+    TextView Nu1;
+    Integer valor=0;
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Nu1=findViewById(R.id.Nu);
+
+    }
+
+    public void Contar (View view) {
+
+        valor++;
+        Nu1.setText(valor.toString());
+        if (valor == 3) {
+
+            Toast.makeText(this, "Ra Leo / Alan", Toast.LENGTH_SHORT).show();
+
+
+        }else if (valor ==4 ){
+
+                Toast.makeText(this, "Ra Matheus", Toast.LENGTH_SHORT).show();
+        }else if (valor ==10 ){
+
+            Toast.makeText(this, "Ra Will Pai", Toast.LENGTH_SHORT).show();
+
+        }
+
+        }
+
+
+
+
+
+
+
+    public void Zerar (View view){
+        valor = 0;
+        Nu1.setText(valor.toString());
+      if (valor == 0){
+
+      }
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+MAIN ACTIVITY .XML
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+
+
+
+    <Button
+        android:id="@+id/Zerar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFC107"
+        android:gravity="center"
+        android:onClick="Zerar"
+        android:text="Zerar"
+        android:textColor="#ffff"
+        android:textSize="50dp"
+
+
+        />
+
+
+
+    <TextView
+        android:id="@+id/Nu"
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:background="#3FF50E"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="#070707"
+        android:textSize="195dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Contar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2441AF"
+        android:gravity="center"
+        android:onClick="Contar"
+        android:text="Contar"
+        android:textColor="#ffff"
+        android:textSize="50dp"
+
+
+        />
+
+</LinearLayout>
