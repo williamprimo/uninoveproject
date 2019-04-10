@@ -1,0 +1,97 @@
+ConexaoBanco.java
+
+// pacotes
+package conexaobanco;
+// import's
+import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+// Abrindo uma classe Pública
+public class ConexaoBanco {
+
+//Definindo variáveis privativas no escopo do projeto    
+private final String URL = "jdbc:mysql://localhost:3306/empresa";
+private final String SENHA = "";
+private final String USER = "root";
+private PreparedStatement st;
+private ResultSet rs;
+private Connection con;
+
+   // VOID para realizar conexão com o Banco de Dados
+    public void conectar() {
+        
+       try {
+           con=DriverManager.getConnection(URL, USER, SENHA);        
+           System.out.println("Conexão Realizada com Sucesso");
+           
+           
+       } catch (SQLException e){
+          System.out.println("Falha ao COnectar!!\n"+e);
+       }
+    
+    }
+    // VOID para realizar o Fechamento da COnexão com Banco de Dados
+    public void fechar(){
+    try{
+        con.close();
+       System.out.println("Encerrado com sucesso!!");
+    } catch (SQLException e){
+        System.out.println("Falha ao fechar");
+    }
+    
+    }
+    
+    public String listar(){
+        String r="";
+        
+        try {
+          
+          String comando = "SELECT * FROM funcionario";
+          st=con.prepareStatement((comando));
+          rs=st.executeQuery(comando);
+          
+          while(rs.next()){
+          
+              r+=r+rs.getInt("id")
+               +rs.getString("nome")
+               +rs.getString("cargo")
+               +rs.getFloat("salario") + "\n";
+              
+              }
+          
+          
+        } catch (SQLException e) {
+          System.out.println("Falha ao Consultar");
+        }
+        return r;
+    }
+    
+}
+
+
+--------------------------------------------------------------------------------------------------------
+
+
+Valida.java
+
+
+package conexaobanco;
+
+
+public class Valida {
+    
+    public static void main(String[] args) {
+        ConexaoBanco c=new ConexaoBanco();
+         c.conectar();
+         
+         System.out.println(c.listar());
+         
+         c.fechar();
+        
+    
+    }
+    
+}
