@@ -1,0 +1,201 @@
+package empresa;
+
+import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class FuncionarioDAO {
+  private final String URL="jdbc:mysql://localhost:3306/empresa2";
+  private final String USER="root";
+  private final String SENHA="";
+  private Connection con;
+  private PreparedStatement st;
+  private ResultSet rs;
+    
+    public void conectar(){
+        try {
+            con=DriverManager.getConnection(URL,USER,SENHA);
+            System.out.println("Conexão relaizada com sucesso!!");
+        } catch (SQLException e) {
+            System.out.println("Falha ao conectar!!\n"+e);
+        }
+    }
+    
+    public void fechar(){
+        try {
+            con.close();
+            System.out.println("Encerrado com sucesso!!");
+        } catch (SQLException e) { 
+            System.out.println("Falha ao fechar!!\n"+e);
+        }
+    }
+    
+    public String listar(){
+        String resp="";
+        try {
+             String sql="SELECT * FROM funcionario ORDER BY salario";
+             st=con.prepareStatement(sql);
+             rs=st.executeQuery();
+             System.out.println("ID  -   nome");
+             while(rs.next()){
+                   resp+=rs.getInt("id")+" "
+                        +rs.getString("nome")+" "
+                        +rs.getString("cargo")+" "
+                        +rs.getFloat("salario")+"\n";
+             }
+             return resp;
+        } catch (SQLException e) {
+            System.out.println("Falha ao listar!!\n"+e);
+            return resp;
+        }
+    }
+    
+    public void inserir(Funcionario f ){
+        try {
+            
+            String sql="INSERT INTO funcionario (nome,cargo,salario) VALUES(?,?,?)";
+            
+            st=con.prepareStatement(sql);
+        
+            st.setString(1, f.getNome());
+            st.setString(2, f.getCargo());
+            st.setFloat(3, f.getSalario());
+            st.execute();
+        
+        } catch (SQLException e) {
+            System.out.println("Falha ao inserir \n"+e);
+            
+        }
+       
+    }
+    
+    public void atualizar(Funcionario f) {
+    
+        try {
+            
+            String sql="UPDATE funcionario set SALARIO=? WHERE id=?";
+            
+            st=con.prepareStatement(sql);
+            
+            st.setFloat(1, f.getSalario());
+            st.setInt(2, f.getId());
+             st.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println("Falha ao Atualizar \n"+e);
+        }
+    }
+    
+    public void excluir(Funcionario f) {
+    
+        try {
+            String sql="DELETE FROM funcionario WHERE id=?";
+            
+            st=con.prepareStatement(sql);
+            
+            st.setInt(1, f.getId());
+             st.execute();
+
+        } catch (SQLException e) {
+            System.out.println("Falha ao excluir \n"+e);
+        }
+    
+    
+    }
+    
+   public String buscar(int id){
+        String resp="";
+        try {
+             String sql="SELECT * FROM funcionario WHERE id=?";
+             st=con.prepareStatement(sql);
+             st.setInt(1, id);
+             rs=st.executeQuery();
+             
+             System.out.println("ID  -   nome");
+             
+             if(rs.next()){
+                   resp+=rs.getInt("id")+" "
+                        +rs.getString("nome")+" "
+                        +rs.getString("cargo")+" "
+                        +rs.getFloat("salario")+"\n";
+             }
+             
+             return resp;
+        } 
+        
+        catch (SQLException e) {
+            System.out.println("Falha ao buscar!!\n"+e);
+            return resp;
+        }
+    }
+    
+    
+    
+}
+
+===================================================================================================
+
+CADASTRO.JAVA
+
+
+
+
+package empresa;
+
+public class Cadastro {
+
+    public static void main(String[] args) {
+       FuncionarioDAO funcDAO=new FuncionarioDAO();
+       funcDAO.conectar();
+       System.out.println(funcDAO.listar()); 
+         // Instânciando a classe Funcionário
+    
+    Funcionario f=new Funcionario();
+    
+    // ------------------------ FUNÇÃO INSERIR ------------------
+    
+  //  f.setNome("Bruce Wayne");
+  //  f.setCargo ("Batman");
+  //  f.setSalario(9000);  
+    
+    //Inserir os dados na tabela funcionarios 
+  
+    // funcDAO.inserir(f);
+    // funcDAO.fechar(); 
+    
+    
+    // --------------------- FUNÇÃO UPDATE -------------------
+    
+    
+   //    f.setId(2);
+    //   f.setSalario(9000);
+    
+    //  funcDAO.atualizar(f);
+    //  funcDAO.fechar(); 
+    
+     // ------------------- FUNÇÃO DELETAR ---------------------
+     
+ //  f.setId(4);
+    
+   //    funcDAO.excluir(f);
+   //    funcDAO.fechar();
+  
+
+    
+    // ------------------- FUNÇÃO BUSCAR ----------------------
+    
+    
+    
+    System.out.println(""+funcDAO.buscar(5));
+  
+    funcDAO.fechar();
+    
+  
+ 
+       
+    }
+    
+  
+}
